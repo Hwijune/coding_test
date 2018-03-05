@@ -1,0 +1,76 @@
+#include <cstdio>
+#include<vector>
+#include <algorithm>
+#include <cmath>
+#include<stack>
+using namespace std;
+
+bool comp(const pair<int, int> &p1, const pair<int, int> &p2)
+{
+	if (p1.second == p2.second)
+	{
+		return p1.first < p2.first;
+	}
+	return p1.second > p2.second;
+}
+int main() {
+
+	int n;
+	scanf("%d", &n);
+
+	vector<int> v;
+	int key;
+	double sum = 0;
+
+	for (int i = 0; i < n; i++)
+	{
+		scanf("%d", &key);
+		v.push_back(key);
+
+		sum += key;
+	}
+	sort(v.begin(), v.end());
+
+	printf("%d\n", (int)floor((sum / n) + 0.5));
+
+	printf("%d\n", v[n / 2]);
+
+	vector<pair<int, int>> st;
+	vector<int>::size_type i;
+
+	for (int i = 0; i < v.size(); i++)
+	{
+		if (st.empty())
+		{
+			st.push_back(pair<int, int>(v[i], 1));
+			continue;
+		}
+
+		if (st.back().first == v[i])
+		{
+			pair<int, int> temp = st.back();
+			temp.second++;
+			st.pop_back();
+			st.push_back(temp);
+		}
+		else
+		{
+			st.push_back(pair<int, int>(v[i], 1));
+		}
+	}
+
+	sort(st.begin(), st.end(), comp);
+
+	if (st[0].second == st[1].second)
+	{
+		printf("%d\n", st[1].first);
+	}
+	else
+	{
+		printf("%d\n", st[0].first);
+	}
+	
+	printf("%d", v.back() - v.front());
+
+	return 0;
+}
