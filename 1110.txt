@@ -1,0 +1,20 @@
+def next_num(n):
+    temp = str(int(n[0]) + int(n[1]))
+    if len(temp) == 1:
+        return n[1] + temp
+    else:
+        return n[1] + temp[1]
+
+n = str(input())
+
+if(int(n)<10):
+    n = "0"+str(n)
+
+count = 0
+w = n
+while(True):
+    count +=1
+    w = next_num(w)
+    if(w == n):
+        break
+print(count)
