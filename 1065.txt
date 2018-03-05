@@ -1,0 +1,18 @@
+num = int(input())
+
+if(num<=1000 and num>=1):
+    sum = 0
+    #100밑에는 해당하는 수까지가 한수임
+    if(num<100):
+        sum=num
+    else:
+        sum=99
+
+    for i in range(100,num+1,1):
+        arr = str(i)
+        re1 = int(arr[0])-int(arr[1])
+        re2 = int(arr[1])-int(arr[2])
+        if(re1 == re2):
+            sum+=1
+
+    print(sum)
