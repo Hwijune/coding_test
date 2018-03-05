@@ -1,0 +1,16 @@
+#include<iostream>
+#include<algorithm>
+#include<string>
+using namespace std;
+
+int main(void) {
+	string arr;
+	cin >> arr;
+
+	sort(arr.begin(),arr.end());
+	reverse(arr.begin(), arr.end());
+
+	cout << arr;
+
+	return 0;
+}
