@@ -1,0 +1,51 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+int main(){
+	int T=0;
+	int roomnum = 0;
+
+	//테스트수
+	cin >> T;
+
+	//2차원배열
+	int** arr = new int*[T];
+	for (int i = 0; i < T; i++)
+	{
+		arr[i] = new int[3];
+	}
+
+	for (int i = 0; i < T; i++)
+	{
+		for (int j = 0; j < 3; j++)
+		{
+			cin >> arr[i][j];
+		}
+	}
+
+	int beforenum = 0;
+	int afternum = 0;
+	
+	//계산
+	for (int i = 0; i < T; i++)
+	{
+		beforenum = arr[i][2] % arr[i][0];
+		afternum = arr[i][2] / arr[i][0] +1;
+
+		if (beforenum == 0)
+		{
+			beforenum = arr[i][0];
+			afternum -= 1;
+		}
+		cout << beforenum << setw(2) << setfill('0') << afternum << endl;
+	}
+
+	for (int i = 0; i < T; i++)
+	{
+		delete[] arr[i];
+	}
+
+	delete[] arr;
+	return 0;
+}
