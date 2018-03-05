@@ -1,0 +1,37 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <string.h>
+#include <cmath>
+#include <array>
+using namespace std;
+
+int main() {
+	string roomnum = "";
+
+	cin >> roomnum;
+
+	int arr[] = { 0,0,0,0,0,0,0,0,0,0 };
+
+	int size = roomnum.length();
+	for (int i = 0; i < size; i++)
+	{
+		arr[roomnum[i] - '0']++;
+	}
+
+	int sum = ((arr[6] + arr[9]+1) / 2);
+	arr[6] = 0;
+	arr[9] = sum;
+	//max°ªÃ£±â
+	int max = 0;
+	for (int i = 0; i < 10; i++)
+	{
+		if (arr[i] > max)
+		{
+			max = arr[i];
+		}
+	}
+
+	cout << max;
+	return 0;
+}
