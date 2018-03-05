@@ -1,0 +1,32 @@
+str = input()
+
+arr = [0]*26
+#대문자 65 ~ 97
+#소문자 97 ~ 122
+
+for i in range(len(str)):
+    #대문자일때
+    if(int(ord(str[i]))>=65 and int(ord(str[i]))<97):
+        arr[int(ord(str[i]))-65] +=1
+    if(int(ord(str[i]))>=97 and int(ord(str[i]))<=122):
+        arr[int(ord(str[i])) - 97] += 1
+
+#print(arr)
+maxcount= 0
+max = 0 # 가장큰값
+maxnum = 0 # 자리 위치 값
+maxbool = True # 맥스 불린 값 두개이상이면 false
+
+for i in range(len(arr)):
+    if(arr[i]>max):
+        max = arr[i]
+        maxnum = i
+        maxbool = True
+    elif(max!=0 and max==arr[i]):
+        maxbool = False
+
+#print(maxnum)
+if(maxbool):
+        print(chr(maxnum+65))
+else:
+    print("?")
