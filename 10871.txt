@@ -1,0 +1,6 @@
+N,X = map(int,input().split())
+if(N>=1 and X<=10000):
+    list = list(map(int,input().split()))
+    for i in range(0,len(list),1):
+        if(list[i]<X):
+            print(list[i],end=' ')
