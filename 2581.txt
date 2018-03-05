@@ -1,0 +1,47 @@
+import java.util.*;
+
+public class Main
+{
+	static int check(int num)
+	{
+		int count = 0;
+		for (int i = 2; i < num; i++)
+		{
+			if (num % i == 0)
+			{
+				count++;
+			}
+		}
+		if (num == 1)
+			return 0;
+		if (count == 0)
+			return num;
+		else
+			return 0;
+	}
+	
+	public static void main(String[] args)
+	{
+		Scanner in = new Scanner(System.in);
+		int num1 = Integer.parseInt(in.nextLine());
+		int num2 = Integer.parseInt(in.nextLine());
+		int min = 10000;
+		int sum = 0;
+		
+		for (int i = num1; i <= num2; i++)
+		{
+			if (min > check(i) && check(i) != 0)
+			{
+				min = check(i);
+			}
+			sum += check(i);
+		}
+		if (sum == 0)
+			System.out.println("-1");
+		else
+		{
+			System.out.println(sum);
+			System.out.println(min);
+		}
+	}
+}
