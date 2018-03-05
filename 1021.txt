@@ -1,0 +1,59 @@
+import java.io.*;
+import java.util.*;
+
+public class Main
+{
+	public static void main(String... args) throws Exception
+	{
+		LinkedList<Integer> deque = new LinkedList<>();
+		LinkedList<Integer> checkque = new LinkedList<Integer>();
+		
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer tt = new StringTokenizer(in.readLine());
+		
+		int N = Integer.parseInt(tt.nextToken());
+		int M = Integer.parseInt(tt.nextToken());
+		
+		for (int i = 1; i <= N; i++)
+		{
+			deque.add(i);
+		}
+		
+		// 체크토큰
+		StringTokenizer chtt = new StringTokenizer(in.readLine());
+		for (int i = 0; i < M; i++)
+		{
+			int n = Integer.parseInt(chtt.nextToken());
+			checkque.add(n);
+		}
+		int count = 0; // 이동갯수
+		
+		while (!checkque.isEmpty())
+		{
+			int n = checkque.get(0); // 체크값
+			int frodist = deque.indexOf(n); // 데크에서위치
+			int backdist = deque.size() - frodist - 1; // 거리 짧은곳으로이동
+			// System.out.println(frodist + " // " + backdist);
+			if (deque.getFirst() == n)
+			{
+				deque.pollFirst();
+				checkque.pollFirst();
+			}
+			else if (frodist <= backdist)
+			{
+				int k = deque.poll();
+				deque.addLast(k);
+				++count;
+			} else
+			{
+				int k = deque.pollLast();
+				deque.addFirst(k);
+				++count;
+			}
+//			System.out.println(deque);
+//			System.out.println(checkque + " // " + count);
+		}
+		// 거리재기
+		System.out.println(count);
+	}
+}
