@@ -1,0 +1,29 @@
+def check(num):
+    n = 1
+    sum = 0
+    i=0
+    j=0
+    updown = "up"
+    while(num>sum):
+        sum+=n
+        n+=1
+        if(updown == "up"):
+            updown = "down"
+        else:
+            updown = "up"
+
+    #print(sum,updown,n-1)
+
+    count = sum - num +1# 시작값과 num값의 차
+    if(updown == "up"):
+        i = n - count
+        j = 0 + count
+    elif(updown == "down"):
+        i = 0 + count
+        j = n - count
+
+    print("%d/%d" %(i,j))
+
+num = int(input())
+
+check(num)
