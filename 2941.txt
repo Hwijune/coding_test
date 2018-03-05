@@ -1,0 +1,15 @@
+def changearc(arr):
+    arr = arr.replace("c=", "o")
+    arr = arr.replace("c-", "o")
+    arr = arr.replace("dz=", "o")
+    arr = arr.replace("d-", "o")
+    arr = arr.replace("lj", "o")
+    arr = arr.replace("nj", "o")
+    arr = arr.replace("s=", "o")
+    arr = arr.replace("z=", "o")
+
+    print(len(arr))
+
+li = input()
+
+changearc(li)
