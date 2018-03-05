@@ -1,0 +1,77 @@
+import java.util.*;
+import java.io.*;
+
+public class Main
+{
+	static int check(int num)
+	{
+		int count = 0;
+		for (int i = 2; i < num; i++)
+		{
+			if (num % i == 0)
+			{
+				count++;
+				break;
+			}
+		}
+		if (num == 1)
+			return 0;
+		if (count == 0)
+			return 1;
+		else
+			return 0;
+	}
+	
+	public static void main(String[] args) throws IOException
+	{
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		int n = 0;
+		int sum = 0;
+		int max = 123456*2;
+		StringBuffer st = new StringBuffer();//버퍼
+		
+		//아레스토테네스 체
+		ArrayList<Integer> primeList = new ArrayList<Integer>(max);
+		primeList.add(0);
+		primeList.add(0);
+		
+		for (int i = 2; i <= max; i++)
+		{
+			primeList.add(i, 1);
+		}
+		
+		for (int i = 2; (i * i) <= max; i++)
+		{
+			if (primeList.get(i) == 1)
+			{
+				for (int j = i * i; j <= max; j += i)
+				{
+					primeList.set(j, 0);
+				}
+			}
+		}
+		
+		//트루갯수세기
+		while(true)
+		{
+			n = Integer.parseInt(in.readLine());
+			sum=0;
+			for(int i=n+1; i<=2*n; i++)
+			{
+				//System.out.println(i + " : " +primeList.get(i));
+				sum+=primeList.get(i);
+			}
+			
+			//System.out.println(sum);
+			if(n!=0)
+				st.append(sum + "\n");
+			if(n == 0)
+				break;
+		}
+		out.write(st +"");
+		
+		out.flush();
+		out.close();
+	}
+}
