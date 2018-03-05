@@ -1,0 +1,65 @@
+import java.io.*;
+import java.util.*;
+
+public class Main
+{
+	public static void main(String... args) throws Exception
+	{
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		
+		Deque<Integer> deque = new ArrayDeque<>();
+		int N = Integer.parseInt(in.readLine());
+		
+		while (N-- > 0)
+		{
+			int num = 0;
+			
+			StringTokenizer tt = new StringTokenizer(in.readLine());
+			String cmd = tt.nextToken();
+			
+			if (tt.countTokens() >= 1)
+				num = Integer.parseInt(tt.nextToken());
+			
+			if (cmd.equals("push_back"))
+				deque.addLast(num);
+			else if (cmd.equals("push_front"))
+				deque.addFirst(num);
+			else if (cmd.equals("front"))
+			{
+				if (deque.size() == 0)
+					sb.append("-1\n");
+				else
+					sb.append(deque.peekFirst() + "\n");
+			} else if (cmd.equals("back"))
+			{
+				if (deque.size() == 0)
+					sb.append("-1\n");
+				else
+					sb.append(deque.peekLast() + "\n");
+			} else if (cmd.equals("pop_front"))
+			{
+				if (deque.size() == 0)
+					sb.append("-1\n");
+				else
+					sb.append(deque.pollFirst() + "\n");
+			} else if (cmd.equals("pop_back"))
+			{
+				if (deque.size() == 0)
+					sb.append("-1\n");
+				else
+					sb.append(deque.pollLast() + "\n");
+			} else if (cmd.equals("size"))
+				sb.append(deque.size() + "\n");
+			else if (cmd.equals("empty"))
+			{
+				if (deque.isEmpty())
+					sb.append("1\n");
+				else
+					sb.append("0\n");
+			}
+			
+		}
+		System.out.println(sb);
+	}
+}
