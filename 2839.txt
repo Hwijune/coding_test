@@ -1,0 +1,62 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApplication3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int num = 0, back3 = 0;
+            int count = 0;
+
+            if(num >=3 || num<=5000)
+                num = int.Parse(Console.ReadLine());
+
+            if (num % 5 == 0) // 5ÀÇ ¹è¼ö
+                Console.WriteLine(num / 5);
+            else if(num%3==0 && num%5 != 0)
+            {
+                back3 = num / 3;
+                while(num>=3)
+                {
+                    num -= 3;
+                    count++;
+                    if(num%5 == 0)
+                    {
+                        count += num / 5;
+                        num %= 5;
+                    }
+                }
+                if (num != 0)
+                    count = 0;
+                if(count != 0)
+                {
+                    Console.WriteLine(back3 > count ? count : back3);
+                }
+            }
+            else if(num%5!=0 && num%3 !=0)
+            {
+                while(num>=3)
+                {
+                    num -= 3;
+                    count++;
+                    if(num%5 ==0)
+                    {
+                        count += num / 5;
+                        num %= 5;
+                    }
+                }
+                if (num != 0)
+                    Console.WriteLine("-1");
+                else
+                    Console.WriteLine(count);
+            }
+            else
+                Console.WriteLine("-1");
+        }
+    }
+}
