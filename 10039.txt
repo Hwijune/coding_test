@@ -1,0 +1,12 @@
+exam = [0]*5
+
+for i in range(5):
+    exam[i] = int(input())
+    
+sum = 0
+for j in range(5):
+    if(exam[j]<40):
+        exam[j] = 40
+    sum+=exam[j]
+
+print(int(sum/5))
