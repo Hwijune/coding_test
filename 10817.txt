@@ -1,0 +1,10 @@
+list = []
+
+a,b,c = map(int,input().split())
+list.append(a)
+list.append(b)
+list.append(c)
+
+if(a,b,c>=1 and a,b,c<=100):
+    list.sort()
+    print(list[1])
