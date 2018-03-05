@@ -1,0 +1,19 @@
+T = int(input())
+
+numarr = []
+strarr = []
+
+for i in range(T):
+    a,b = map(str,input().split())
+    numarr.append(a)
+    strarr.append(b)
+
+#라인수
+for k in range(len(numarr)):
+    #각 단어길이
+    for i in range(len(strarr[k])):
+        s = strarr[k]
+        #앞자리 숫자만큼반복
+        for j in range(int(numarr[k])):
+            print(s[i],end='')
+    print()
