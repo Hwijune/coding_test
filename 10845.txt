@@ -1,0 +1,60 @@
+import java.util.*;
+import java.io.*;
+
+public class Main
+{
+	public static void main(String[] args) throws IOException
+	{
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		Queue<Integer> qu = new LinkedList<Integer>();
+		
+		int num = Integer.parseInt(in.readLine());
+		
+		for (int i = 0; i < num; i++)
+		{
+			StringTokenizer tt = new StringTokenizer(in.readLine());
+			String t = tt.nextToken();
+			int n = 0;
+			if (tt.countTokens() >= 1)
+				n = Integer.parseInt(tt.nextToken());
+			
+			if (t.equals("push"))
+			{
+				qu.offer(n);
+			} else if (t.equals("pop"))
+			{
+				if (qu.size() < 1)
+					System.out.print("-1\n");
+				else
+					System.out.print(qu.poll() + "\n");
+			} else if (t.equals("size"))
+			{
+				System.out.print(qu.size() + "\n");
+			} else if (t.equals("empty"))
+			{
+				if (qu.size() == 0)
+					System.out.print("1\n");
+				else
+					System.out.print("0\n");
+			} else if (t.equals("back"))
+			{
+				if (qu.size() == 0)
+				{
+					System.out.print("-1\n");
+				} else
+				{
+					System.out.print(((LinkedList<Integer>) qu).get(qu.size()-1) + "\n");
+				}
+			} else if (t.equals("front"))
+			{
+				if (qu.size() == 0)
+				{
+					System.out.print("-1\n");
+				} else
+				{
+					System.out.print(qu.peek() + "\n");
+				}
+			}
+		}
+	}
+}
