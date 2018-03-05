@@ -1,0 +1,28 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	public static int bincoeff(int n, int k)
+	{
+		if (k == 0 || k == n)
+			return 1;
+		else
+			return bincoeff(n - 1, k - 1) + bincoeff(n - 1, k);
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		
+		StringTokenizer st = new StringTokenizer(in.readLine());
+		while (st.hasMoreTokens())
+		{
+			int n = Integer.parseInt(st.nextToken());
+			int k = Integer.parseInt(st.nextToken());
+			System.out.println(bincoeff(n, k));
+		}
+	}
+}
