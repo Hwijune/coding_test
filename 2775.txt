@@ -1,0 +1,62 @@
+#include <iostream>
+#include <iomanip>
+#include <string.h>
+using namespace std;
+
+int main(){
+	
+	int T = 0;
+
+	cin >> T;
+	int kk = 0;
+	int n = 0;
+
+
+	
+
+	for(int d=0; d<T;d++)
+	{
+		cin >> kk >> n;
+		int num = 1;
+
+		int k = kk+1;
+		int** arr = new int*[k];
+		for (int i = 0; i < k; i++)
+		{
+			arr[i] = new int[n];
+			memset(arr[i], 0, sizeof(int)*n);
+		}
+
+		
+		for (int i = 0; i < n; i++)
+		{
+			arr[0][i] = num;
+			num += 1;
+		}
+
+		for (int i = 1; i < k; i++)
+		{
+			for (int j = 0; j < n; j++)
+			{
+				int sum = 0;
+				for (int w = 0; w < j+1; w++)
+				{
+					sum += arr[i - 1][w];
+				}
+				arr[i][j] = sum;
+			}
+		}
+		
+		cout << arr[kk][n-1] << endl;
+
+		for (int i = 0; i < k; i++)
+		{
+			delete[] arr[i];
+		}
+		delete[] arr;
+
+	}
+
+
+	return 0;
+}
