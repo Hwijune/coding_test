@@ -1,0 +1,14 @@
+A = int(input())
+B = int(input())
+C = int(input())
+
+if(A,B,C>=100 and A,B,C<1000):
+    result = A*B*C
+    result = str(result)
+
+    for i in range(0,10,1):
+        count = 0
+        for j in range(0,len(result),1):
+            if(int(result[j]) == i):
+                count+=1
+        print(count)
