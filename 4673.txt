@@ -1,0 +1,24 @@
+def func(n):
+    sum = 0
+    strn = str(n)
+    for i in range(0,len(strn),1):
+        sum += int(strn[i])
+    result = sum+n
+    return int(result)
+
+arr = []
+for i in range(1,10000,1):
+    n = func(i)
+    if(n<10000):
+        arr.append(n)
+
+arr.sort()
+arr = set(arr)
+arr = list(arr)
+
+n=0
+for i in range(1,10000,1):
+    if(i>=arr[n]):
+        n+=1
+    elif(i<arr[n]):
+        print(i)
