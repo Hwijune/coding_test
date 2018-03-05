@@ -1,0 +1,31 @@
+def CheckGword(str):
+    arr = list(set(str))
+    max = 0
+    for i in range(len(arr)):
+        t = str.find(arr[i]) #문자열에서 중복제거한 문자 위치찾기
+        result = ""
+        #그 문자가 시작되는 곳부터 따짐 aabbbccbb면 다시 나타날때 FT가 항상있음
+        for k in range(t,len(str),1):
+            if(str[t]==str[k]):
+                result += "T"
+            else:
+                result += "F"
+        # print(result)
+        # print(result.find('FT'))
+        if(max<=result.find('FT')):
+            max = result.find('FT')
+    if(max>0): # 다음에 나타나면 0리턴
+        return 0
+    else: #그룹단어이면 1리턴
+        return 1
+
+
+
+N = int(input())
+arr = []
+count = 0
+for i in range(N):
+    arr.append(input())
+    count += CheckGword(arr[i])
+
+print(count)
