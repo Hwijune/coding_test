@@ -1,0 +1,11 @@
+dial = [[2,2,2,3,3,3,4,4,4,5,5,5,6,6,6,7,7,7,7,8,8,8,9,9,9,9],['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z']]
+
+name = input()
+sum = len(name)
+
+for k in range(len(name)):
+    for i in range(len(dial[0])):
+        if(name[k] == dial[1][i]):
+            sum += dial[0][i]
+
+print(sum)
