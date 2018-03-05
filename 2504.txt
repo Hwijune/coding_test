@@ -1,0 +1,61 @@
+import java.util.*;
+import java.io.*;
+
+public class Main
+{
+	static int check(String str)
+	{
+		Stack<Character> stack = new Stack<>();
+		int mul = 1;
+		int sum = 0;
+		int n = 0;
+		int m = 0;
+		int len = str.length();
+		
+		for (int i = 0; i < len; i++)
+		{
+			char a = str.charAt(i);
+			if (a == '(')
+			{
+				n++;
+				stack.push(a);
+				mul *= 2;
+				if (i + 1 < len && str.charAt(i + 1) == ')')
+					sum += mul;
+			} else if (a == '[')
+			{
+				m++;
+				stack.push(a);
+				mul *= 3;
+				if (i + 1 < len && str.charAt(i + 1) == ']')
+					sum += mul;
+			} else if (a == ')')
+			{
+				n--;
+				stack.pop();
+				mul /= 2;
+			} else if (a == ']')
+			{
+				m--;
+				stack.pop();
+				mul /= 3;
+			}
+		}
+		
+		if (!stack.empty() || n != 0 || m != 0)
+		{
+			return 0;
+		}
+		return sum;
+	}
+	
+	public static void main(String[] args) throws IOException
+	{
+		StringBuilder sb = new StringBuilder();
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		ArrayList<Integer> arr = new ArrayList<Integer>();
+		
+		String s = in.readLine();
+		System.out.println(check(s));
+	}
+}
