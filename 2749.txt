@@ -1,0 +1,39 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	static int pisano_period(int m)
+	{
+		int period = 0;
+		int number1 = 1, number2 = 1;
+		do
+		{
+			int temp = number1;
+			number1 = number2;
+			number2 = (temp + number2) % m;
+			period++;
+		} while (!(number1 == 1 && number2 == 1));
+		return period;
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		long n = Long.parseLong((in.readLine()));
+		
+		int mod = 1000000;
+		int period = pisano_period(mod);
+		
+		long[] pibo = new long[period+1];
+		pibo[0] = 0;
+		pibo[1] = 1;
+		for (int i = 2; i < period; i++)
+		{
+			pibo[i] = pibo[i - 2] + pibo[i - 1];
+			pibo[i] %= mod;
+		}
+		System.out.println(pibo[(int) (n % period)]);
+	}
+}
