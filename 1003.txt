@@ -1,0 +1,42 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	static int count0 = 0;
+	static int count1 = 0;
+	
+	static int fibonacci(int m)
+	{
+		if (m == 0)
+		{
+			count0++;
+			return 0;
+		} else if (m == 1)
+		{
+			count1++;
+			return 1;
+		} else
+		{
+			return fibonacci(m - 1) + fibonacci(m - 2);
+		}
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		int T = Integer.parseInt((in.readLine()));
+		while (T-- > 0)
+		{
+			int n = Integer.parseInt(in.readLine());
+			fibonacci(n);
+			sb.append(count0 + " " + count1 +"\n");
+			count0=0;
+			count1=0;
+		}
+		System.out.print(sb);
+		
+	}
+}
