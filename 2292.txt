@@ -1,0 +1,17 @@
+def check(num):
+    N = 1 #n값
+    addnum = 6 #전에 값+6
+    endnum = 1 #처음방
+    while(True):
+        if(endnum>=num):
+            break
+        endnum+=addnum
+        addnum+=6
+        N+=1
+    print(N)
+
+
+
+num = int(input())
+
+check(num)
