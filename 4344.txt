@@ -1,0 +1,50 @@
+import java.util.*;
+
+public class Main
+{
+
+	public static void main(String[] args)
+	{
+		Scanner in = new Scanner(System.in);
+
+		int allnum = in.nextInt();
+
+		double result[] = new double[allnum];
+
+		for (int i = 0; i < allnum; i++)
+		{
+			int person = in.nextInt();
+
+			double [] arr = new double[person];
+
+			double sum = 0;
+			for (int j = 0; j < arr.length; j++)
+			{
+				arr[j] = in.nextInt();
+				sum += arr[j];
+			}
+
+			
+			double aver;
+			aver = sum / arr.length; //ЦђБе
+
+			double count = 0;
+			for (int k = 0; k < arr.length; k++)
+			{
+				
+				if (aver < arr[k])
+				{
+					count++;
+				}
+			}
+			result[i] = count / arr.length;
+		}
+
+		for (int i = 0; i < result.length; i++)
+		{
+			System.out.printf("%.3f", result[i]*100);
+			System.out.println("%");
+		}
+	}
+
+}
