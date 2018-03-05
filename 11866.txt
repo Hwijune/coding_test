@@ -1,0 +1,61 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String... args)
+	{
+		Scanner input = new Scanner(System.in);
+		int N = input.nextInt();
+		int M = input.nextInt();
+		
+		LinkedList<Node> queue = new LinkedList<Node>();
+		
+		for (int i = M; i <= N; i++)
+			queue.addLast(new Node(i, true));
+		for (int i = 1; i < M; i++)
+			queue.addLast(new Node(i, true));
+		
+		int count = 1;
+		while (!queue.isEmpty())
+		{
+			Node node = queue.poll();
+			// 시작 값
+			if (M == node.index)
+			{
+				count = 1;
+				System.out.print("<"+node.index);
+			} // M만큼 자리이동
+			else if (count >= M)
+			{
+				// queue.addLast(new Node(node.index, false));
+				System.out.print(", " + node.index);
+				count = 1;
+				
+			} else
+			{
+				count++;
+				queue.addLast(new Node(node.index, true));
+			}
+			
+			// 큐체크
+			// for (Node i : queue)
+			// {
+			// System.out.print(i.index + " ");
+			// }
+			// System.out.println("// " + count + " /// " + node.index);
+		}
+		System.out.print(">");
+	}
+	
+	private static class Node
+	{
+		public int index;
+		public boolean check;
+		
+		public Node(int index, boolean check)
+		{
+			this.index = index;
+			this.check = true;
+		}
+	}
+}
