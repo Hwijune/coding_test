@@ -1,0 +1,10 @@
+n = input()
+
+if(len(n)<=1000000):
+    le = n.split(' ')
+    count = 0
+    for i in range(len(le)):
+        if(le[i]!=''):
+            count+=1
+
+    print(count)
