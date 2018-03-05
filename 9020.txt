@@ -1,0 +1,59 @@
+import java.util.*;
+import java.io.*;
+
+public class Main
+{
+	public static void main(String[] args) throws IOException
+	{
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		int n = 0;
+		int sum = 0;
+		int max = 10000;
+		StringBuilder st = new StringBuilder();// 버퍼
+		
+		// 아레스토테네스 체
+		ArrayList<Integer> primeList = new ArrayList<Integer>(max);
+		primeList.add(0);
+		primeList.add(0);
+		
+		for (int i = 2; i <= max; i++)
+		{
+			primeList.add(i, 1);
+		}
+		
+		// 거르기
+		for (int i = 2; (i * i) <= max; i++)
+		{
+			if (primeList.get(i) == 1)
+			{
+				for (int j = i * i; j <= max; j += i)
+				{
+					primeList.set(j, 0);
+				}
+			}
+		}
+		/////////////////////////////////////////
+		
+		int num = 0;
+		String result = "";
+		
+		// 체값 가지고 포문두번돌리기
+		num = Integer.parseInt(in.readLine());
+		for (int k = 0; k < num; k++)
+		{
+			n = Integer.parseInt(in.readLine());
+			int i, j, mid = n/2;
+			for(i=j=mid; i<=n; i--, j++)
+			{
+				if(primeList.get(i)==1 && primeList.get(j)==1)
+				{
+					break;
+				}
+			}
+			out.write(i + " " + j + "\n");
+		}
+		out.flush();
+		out.close();
+	}
+}
