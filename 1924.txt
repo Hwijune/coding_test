@@ -1,0 +1,26 @@
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args)
+	{
+		Scanner in = new Scanner(System.in);
+
+		int mon = in.nextInt();
+		int day = in.nextInt();
+		int allday = 0;
+		int arr[] = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+
+		for (int i = 1; i < mon; i++)
+		{
+			allday += arr[i];
+		}
+
+		allday += day;
+
+		String arrday[] = { "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT" };
+
+		System.out.println(arrday[allday % 7]);
+	}
+
+}
