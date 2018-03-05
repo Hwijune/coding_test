@@ -1,0 +1,46 @@
+import java.util.*;
+import java.io.*;
+
+public class Main
+{
+	public static void main(String[] args) throws IOException
+	{
+		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(System.out));
+		ArrayList<Boolean> primeList;
+		
+		Scanner in = new Scanner(System.in);
+		int start = in.nextInt();
+		int n = in.nextInt();
+		
+		if (n <= 1)
+			return;
+		
+		primeList = new ArrayList<Boolean>(n + 1);
+		primeList.add(false);
+		primeList.add(false);
+		
+		for (int i = 2; i <= n; i++)
+		{
+			primeList.add(i, true);
+		}
+		
+		for (int i = 2; (i * i) <= n; i++)
+		{
+			if (primeList.get(i))
+			{
+				for (int j = i * i; j <= n; j += i)
+				{
+					primeList.set(j, false);
+				}
+			}
+		}
+		
+		for (int i = start; i <= n; i++)
+		{
+			if(primeList.get(i)==true)
+				out.write(i+"\n");
+		}
+		out.flush();
+		out.close();
+	}
+}
