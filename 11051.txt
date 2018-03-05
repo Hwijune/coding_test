@@ -1,0 +1,32 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	static int memo[][] = new int[1050][1050];
+	final static int mod = 10007;
+	
+	public static int bincoeff(int n, int k)
+	{
+		if (memo[n][k] > 0)
+			return memo[n][k];
+		if (k == 0 || n == k)
+			return memo[n][k] = 1;
+		memo[n][k] = bincoeff(n - 1, k - 1) + bincoeff(n - 1, k);
+		return memo[n][k] % mod;
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		
+		StringTokenizer st = new StringTokenizer(in.readLine());
+		
+		int n = Integer.parseInt(st.nextToken());
+		int k = Integer.parseInt(st.nextToken());
+		
+		System.out.println(bincoeff(n, k));
+	}
+}
