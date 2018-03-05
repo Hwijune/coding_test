@@ -1,0 +1,15 @@
+c = int(input())
+
+sum = [0] * c
+for j in range(c):
+    line = input()
+    count=0
+    for i in range(len(line)):
+        if(line[i]=='O'):
+            count+=1
+            sum[j] += count
+        else:
+            count = 0
+
+for k in range(c):
+    print(sum[k])
