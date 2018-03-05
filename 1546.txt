@@ -1,0 +1,14 @@
+N = int(input())
+sum = 0
+aver = 0
+if(N<=1000):
+    list = list(map(int,input().split()))
+    list.sort() # 리스트 정렬
+
+    for i in range(0,N,1):
+        list[i]=list[i]/list[len(list)-1]*100
+        sum += list[i]
+
+    aver = sum/N
+
+    print("%.2f" %aver)
