@@ -1,0 +1,26 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+ 
+public class Main
+{
+    // fac ±¸ÇÏ±â
+    static long fac(long n)
+    {
+        long ret = 1;
+        while (n > 1)
+        {
+            ret = (ret * n);
+            n--;
+        }
+        return ret;
+    }
+    
+    public static void main(String[] args) throws Exception
+    {
+        Scanner in = new Scanner(System.in);
+        long n = in.nextInt();
+        
+        System.out.println(fac(n));
+    }
+}
