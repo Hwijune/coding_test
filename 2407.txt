@@ -1,0 +1,36 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	// fac ±¸ÇÏ±â
+	static BigInteger fac(long n,int d)
+	{
+		BigInteger ret = new BigInteger("1");
+		while (n > d)
+		{
+			ret = ret.multiply(BigInteger.valueOf(n));
+			n--;
+		}
+		return ret;
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		BigInteger big = new BigInteger("0");
+
+		Scanner in = new Scanner(System.in);
+		int n = in.nextInt();
+		int m = in.nextInt();
+		
+		if(n==m)
+			big = BigInteger.valueOf(1);
+		else
+		{
+			big = fac(n,n-m);
+			big = big.divide(fac(m,1));
+		}
+		System.out.println(big);
+	}
+}
