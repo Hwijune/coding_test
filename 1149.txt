@@ -1,0 +1,81 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	static int dp[][] = new int[1000][3];
+	
+	static int min(int r, int g, int b)
+	{
+		if (r >= g && b >= g)
+			return 1;
+		else if (g >= r && b >= r)
+			return 0;
+		else
+			return 2;
+	}
+	
+	static void min2(int r, int g, int b, int number, int n)
+	{
+		if (number == 0)
+		{
+			if (dp[n - 1][1] + r > dp[n - 1][2] + r)
+				dp[n][0] = dp[n - 1][2] + r;
+			else
+				dp[n][0] = dp[n - 1][1] + r;
+			dp[n][1] = dp[n - 1][number] + g;
+			dp[n][2] = dp[n - 1][number] + b;
+		} else if (number == 1)
+		{
+			if (dp[n - 1][0] + g > dp[n - 1][2] + g)
+				dp[n][1] = dp[n - 1][2] + g;
+			else
+				dp[n][1] = dp[n - 1][0] + g;
+			dp[n][0] = dp[n - 1][number] + r;
+			dp[n][2] = dp[n - 1][number] + b;
+		} else
+		{
+			if (dp[n - 1][0] + b > dp[n - 1][1] + b)
+				dp[n][2] = dp[n - 1][1] + b;
+			else
+				dp[n][2] = dp[n - 1][0] + b;
+			dp[n][0] = dp[n - 1][number] + r;
+			dp[n][1] = dp[n - 1][number] + g;
+		}
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		int T = Integer.parseInt((in.readLine()));
+		int n = 0;
+		
+		int number = 0;
+		
+		StringTokenizer st = new StringTokenizer(in.readLine());
+		dp[n][0] = Integer.parseInt(st.nextToken());
+		dp[n][1] = Integer.parseInt(st.nextToken());
+		dp[n][2] = Integer.parseInt(st.nextToken());
+		number = min(dp[n][0], dp[n][1], dp[n][2]);
+		//System.out.println(dp[n][0]+" "+dp[n][1]+" "+dp[n][2]+" " + number+" "+ n);
+		n++;
+		
+		while (T-- > 1)
+		{
+			StringTokenizer st1 = new StringTokenizer(in.readLine());
+			dp[n][0] = Integer.parseInt(st1.nextToken());
+			dp[n][1] = Integer.parseInt(st1.nextToken());
+			dp[n][2] = Integer.parseInt(st1.nextToken());
+			
+			min2(dp[n][0], dp[n][1], dp[n][2], number, n);
+			number = min(dp[n][0], dp[n][1], dp[n][2]);
+			
+			//System.out.println(dp[n][0]+" "+dp[n][1]+" "+dp[n][2]+" " + number+" "+ n);
+			n++;
+		}
+		System.out.println(dp[n-1][number]);
+		
+	}
+}
