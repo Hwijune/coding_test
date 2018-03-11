@@ -1,0 +1,67 @@
+package block;
+
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	static int dp[][] = new int[505][505];
+	
+	static int check(int n, int layer, int i)
+	{
+		int ans = 1;
+		
+		// 좌상단 대각선 합이 위에 합보다 크면 좌상단 대각선값 가짐
+		if (dp[layer - 1][i - 1] + n > dp[layer - 1][i] + n)
+		{
+			ans = dp[layer - 1][i - 1] + n;
+		} else
+			ans = dp[layer - 1][i] + n;
+		
+		return ans;
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		int T = Integer.parseInt((in.readLine()));
+		
+		// 처음 주어진 수
+		int first = Integer.parseInt(in.readLine());
+		dp[1][1] = first;
+		
+		int layer = 1;
+		int max = 0;
+		while (T-- > 1)
+		{
+			layer++; // 층수
+			
+			StringTokenizer st1 = new StringTokenizer(in.readLine());
+			for (int i = 1; i < layer + 1; i++)
+			{
+				if (i == 1) // 첫방 ↑
+				{
+					dp[layer][i] = dp[layer - 1][i] + Integer.parseInt(st1.nextToken());
+					//System.out.print(dp[layer][i] + " ");
+				} else if (i == layer) // 끝방 ↖
+				{
+					dp[layer][i] = dp[layer - 1][layer - 1] + Integer.parseInt(st1.nextToken());
+					//System.out.println(dp[layer][i]);
+				} else
+				{
+					dp[layer][i] = check(Integer.parseInt(st1.nextToken()), layer, i);
+					//System.out.print(dp[layer][i] + " ");
+				}
+				
+				if(dp[layer][i]>max)
+				{
+					max = dp[layer][i];
+				}
+			}
+		}
+		
+		System.out.println(max);
+	}
+}
