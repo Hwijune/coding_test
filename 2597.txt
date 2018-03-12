@@ -1,0 +1,32 @@
+package block;
+
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	static int[] list;
+	static int[][] result;
+	
+	public static void main(String[] args) throws Exception
+	{
+		Scanner in = new Scanner(System.in);
+		int n = in.nextInt();
+		
+		list = new int[n+1];
+		result = new int[n+1][2];
+		for(int i=0; i<=n; i++)
+		{
+			list[i] = in.nextInt();
+		}
+		result[1][0] = result[1][1] = list[1];
+		for(int i=2; i<=n; i++)
+		{
+			result[i][0] = result[i-1][1] + list[i];
+			result[i][1] = Math.max(result[i-2][0], result[i-2][1])+list[i];
+		}
+		System.out.println(Math.max(result[n][0], result[n][1]));
+		
+	}
+}
