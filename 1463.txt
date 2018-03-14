@@ -1,0 +1,32 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	static int dp[] = new int[1000001];
+	
+	static int check(int num)
+	{
+		int count = 0;
+		for (int i = 2; i < num; i++)
+		{
+			int temp = num -1;
+			dp[num] = temp;
+			
+			if(num%2 == 0)
+			{
+				dp[num/2]=num/2;
+			}
+		}
+		return count;
+	}
+	
+	public static void main(String[] args) throws Exception
+	{
+		Scanner in = new Scanner(System.in);
+		int num = in.nextInt();
+		
+		System.out.println(check(num));
+	}
+}
