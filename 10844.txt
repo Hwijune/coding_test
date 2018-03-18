@@ -1,0 +1,54 @@
+package block;
+
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	static int dp[][] = new int[102][10];
+	final static int mod = 1000000000;
+	
+	public static void main(String[] args) throws Exception
+	{
+		Scanner in = new Scanner(System.in);
+		int num = in.nextInt();
+		
+		int sum = 0;
+		
+		for (int j = 1; j < 10; j++)
+		{
+			dp[1][j] = 1;
+		}
+		dp[1][0] = 0;
+		
+		// 두번째 줄 부터
+		for (int i = 2; i <= num; i++)
+		{
+			for (int j = 0; j < 10; j++)
+			{
+				if (j == 0)
+				{
+					dp[i][j] = dp[i - 1][1] % mod;
+					//System.out.print(dp[i][j] + " ");
+				} else if (j == 9)
+				{
+					dp[i][j] = dp[i - 1][8] % mod;
+					//System.out.print(dp[i][j] + " ");
+				} else
+				{
+					dp[i][j] = (dp[i - 1][j - 1] + dp[i - 1][j + 1]) % mod;
+					//System.out.print(dp[i][j] + " ");
+				}
+			}
+			//System.out.println("");
+		}
+		
+		for (int k = 0; k < 10; k++)
+		{
+			sum = (sum + dp[num][k]) % mod;
+		}
+		
+		System.out.println(sum);
+	}
+}
