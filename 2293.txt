@@ -1,0 +1,41 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+public class Main
+{
+	static int dp[] = new int[10001];
+	
+	static void check(int n, int target, int[] coins)
+	{
+		dp[0]=1;
+		
+		for(int i=0; i<n; i++)
+		{
+			for(int j=coins[i]; j<=target; j++)
+			{
+				dp[j] += dp[j-coins[i]];
+			}
+		}
+	}
+	public static void main(String[] args) throws Exception
+	{
+		int n;
+		int k;
+		int[] coins;
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		
+		coins = new int[n];
+		for(int i = 0; i<n; i++)
+		{
+			coins[i] = Integer.parseInt(br.readLine());
+		}
+		check(n,k,coins);
+		System.out.println(dp[k]);
+		
+	}
+}
