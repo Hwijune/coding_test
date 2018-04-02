@@ -1,0 +1,45 @@
+package block;
+
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+
+public class Main
+{
+	static int sum[] = new int[502];
+	static int dp[][] = new int[502][502];
+	final static int INF = 987654321;
+	
+	public static void main(String[] args) throws Exception
+	{
+		Scanner in = new Scanner(System.in);
+		int T = in.nextInt();
+		
+		while (0 < T--)
+		{
+			int n = in.nextInt();
+			for (int i = 1; i <= n; i++)
+			{
+				int num;
+				num = in.nextInt();
+				sum[i] = sum[i - 1] + num;
+			}
+			
+			for (int k = 1; k < n; k++)
+			{
+				for (int i = 1; i <= n - k; i++)
+				{
+					dp[i][i + k] = INF;
+					for (int j = i; j < i + k ; j++)
+					{
+						dp[i][i + k] = Math.min(dp[i][i + k], dp[i][j] + dp[j+1][i + k]);
+					}
+					
+					dp[i][i + k] += sum[i + k] - sum[i - 1];
+				}
+			}
+			
+			System.out.println(dp[1][n]);
+		}
+	}
+}
