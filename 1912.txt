@@ -1,0 +1,36 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+public class Main
+{
+	static long dp[];
+	
+	public static void main(String[] args) throws Exception
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int num = Integer.parseInt(br.readLine());
+		
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		dp = new long[num + 1];
+		for (int i = 1; i < dp.length; i++)
+		{
+			dp[i] = Integer.parseInt(st.nextToken());
+		}
+		
+		long max = dp[1];
+		for (int i = 1; i < dp.length; i++)
+		{
+			
+			dp[i] = Math.max(dp[i], dp[i - 1] + dp[i]);
+			
+			if (max < dp[i])
+				max = dp[i];
+			
+			//System.out.print(dp[i] + " ");
+		}
+		
+		System.out.print(max);
+		
+	}
+}
