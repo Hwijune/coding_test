@@ -1,0 +1,50 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+ 
+public class Main
+{
+    static int go(int x, int y)
+    {
+        if (x >= 0 && -1 * x <= y&& y <= x)
+            return (x * 2 + 1)*(x * 2 + 1) - (x - y);
+        else if (x<0 && x <= y && y <= Math.abs(x) )
+        {
+            return (Math.abs(x) * 2)*(Math.abs(x) * 2) - (Math.abs(x)-1) -y ;
+        }
+        else if (y>x&& y>-1*x)
+        {
+            return ((y - 1) * 2 +1 )* ((y - 1) * 2 + 1) + (y - x);
+        }
+        else
+        {
+            return (Math.abs(y) * 2)*(Math.abs(y) * 2) + (x - y + 1);
+        }
+    }
+    
+    public static void main(String[] args) throws Exception
+    {
+        Scanner in = new Scanner(System.in);
+        int r1 = in.nextInt();
+        int c1 = in.nextInt();
+        int r2 = in.nextInt();
+        int c2 = in.nextInt();
+        
+        String length = go(r1,c1)+"";
+        String length2 = go(r2,c2)+"";
+        String length3 = go(r1,c2)+"";
+        String length4 = go(r2,c1)+"";
+        
+        int len = -1;
+        len = Math.max(Math.max(length.length(),length2.length()), Math.max(length3.length(),length4.length()));
+        
+        for(int i=r1; i<=r2; i++)
+        {
+            for(int j=c1; j<=c2; j++)
+            {
+                System.out.printf("%"+len+"d ",go(i,j));
+            }
+            System.out.println();
+        }
+    }
+}
