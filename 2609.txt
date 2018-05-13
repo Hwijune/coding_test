@@ -1,0 +1,26 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+ 
+public class Main
+{
+    
+    static long euclid(long a, long b)
+    {
+        if (b == 0)
+            return a;
+        else
+            return euclid(b, a % b);
+    }
+    
+    public static void main(String[] args) throws Exception
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        long a = Long.parseLong(st.nextToken());
+        long b = Long.parseLong(st.nextToken());
+        
+        System.out.println(euclid(a,b));
+        System.out.println(a * b / euclid(a, b));
+    }
+}
