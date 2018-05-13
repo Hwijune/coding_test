@@ -1,0 +1,15 @@
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+ 
+public class Main
+{
+    public static void main(String[] args) throws Exception
+    {
+        Scanner in = new Scanner(System.in);
+        double r1 = in.nextDouble();
+ 
+        System.out.printf("%.6f\n",r1*r1*Math.PI);
+        System.out.printf("%.6f",r1*r1*2);
+    }
+}
