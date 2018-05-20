@@ -1,0 +1,83 @@
+package block;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Main
+{
+	private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	private static BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+	
+	public static void main(String[] args) throws IOException
+	{
+		// n size 입력
+		int n = Integer.parseInt(reader.readLine());
+		
+		// 배열에 입력 후 정렬
+		int[] array = new int[n];
+		for (int i = 0; i < n; i++)
+			array[i] = Integer.parseInt(reader.readLine());
+		Arrays.sort(array);
+		
+		// 가장 큰값에서 가장 작은 값의 1을 제외한 모든 약수를 구함
+		int[] numbers = dividers(array[array.length - 1] - array[0]);
+		
+		// System.out.println("numbers:");
+		// for(int a : numbers)System.out.print(String.valueOf(a) + " ");
+		// System.out.println("\n");
+		
+		// 약수로 나누어서 나머지가 같은 경우 찾기
+		for (int num : numbers)
+		{
+			boolean add = true;
+			int mod = array[0] % num;
+			for (int i = 1; i < array.length; i++)
+			{
+				if (array[i] % num != mod)
+				{
+					// System.out.println(String.valueOf(array[i]) + " % " +
+					// String.valueOf(mod) + " = " + String.valueOf(array[i] %
+					// mod));
+					add = false;
+					break;
+				}
+			}
+			if (add)
+				writer.write(String.valueOf(num) + " ");
+		}
+		writer.flush();
+	}
+	
+	private static int[] dividers(int num)
+	{
+		List<Integer> list = new LinkedList<>();
+		list.add(num);
+		
+		for (int i = 2; i <= Math.sqrt(num); i++)
+		{
+			if (num % i == 0)
+			{
+				if (i == num / i)
+					list.add(i);
+				else
+				{
+					list.add(i);
+					list.add(num / i);
+				}
+			}
+		}
+		Collections.sort(list);
+		
+		int[] result = new int[list.size()];
+		for (int i = 0; i < list.size(); i++)
+			result[i] = list.get(i);
+		return result;
+	}
+}
