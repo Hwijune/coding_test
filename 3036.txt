@@ -1,0 +1,39 @@
+package block;
+
+import java.io.*;
+import java.util.*;
+
+public class Main
+{
+	static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+	static BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(System.out));
+	
+	static int euclid(int a, int b)
+	{
+		if (b == 0)
+		{
+			return a;
+		} else
+			return euclid(b, a % b);
+	}
+	
+	public static void main(String[] args) throws IOException
+	{
+		// n size ют╥б
+		int n = Integer.parseInt(reader.readLine());
+		
+		StringTokenizer st = new StringTokenizer(reader.readLine());
+		
+		ArrayList<Integer> arr = new ArrayList<>();
+		while (st.hasMoreTokens())
+		{
+			arr.add(Integer.parseInt(st.nextToken()));
+		}
+		
+		for (int i = 1; i < arr.size(); i++)
+		{
+			int gcd = euclid(arr.get(0), arr.get(i));
+			System.out.println(arr.get(0) / gcd + "/" + arr.get(i) / gcd);
+		}
+	}
+}
