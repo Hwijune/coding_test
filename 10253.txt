@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+
+public class Main
+{
+	
+	public static int gcd(int a, int b)
+	{
+		if (b == 0)
+		{
+			return a;
+		} else
+			return gcd(b, a % b);
+	}
+	
+	public static void main(String[] args) throws IOException
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int T = Integer.parseInt(br.readLine());
+		
+		while (T-- > 0)
+		{
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int A = Integer.parseInt(st.nextToken());
+			int B = Integer.parseInt(st.nextToken());
+			int x = 0;
+			
+			while (A != 1)
+			{
+				x = (B % A == 0) ? (B / A) : (B / A + 1);
+				
+				A = A * x - B;
+				B *= x;
+				int g = gcd(A, B);
+				A /= g;
+				B /= g;
+			}
+			System.out.println(B);
+			// System.out.println(x);
+			
+		}
+		
+	}
+}
