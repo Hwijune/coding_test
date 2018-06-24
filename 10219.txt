@@ -1,0 +1,30 @@
+import java.io.*;
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) throws IOException
+	{
+		Scanner in = new Scanner(System.in);
+		StringBuffer sb = new StringBuffer();
+		int T = in.nextInt();
+		
+		while (T-- > 0)
+		{
+			int a = in.nextInt();
+			int b = in.nextInt();
+			
+			for (int i = 0; i < a; i++)
+			{
+				String line = in.next();
+				
+				for (int j = line.length() - 1; j >= 0; j--)
+				{
+					sb.append(line.charAt(j));
+				}
+				sb.append("\n");
+			}
+		}
+		System.out.println(sb);
+	}
+}
