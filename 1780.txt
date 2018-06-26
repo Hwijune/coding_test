@@ -1,0 +1,155 @@
+package block;
+
+import java.io.*;
+import java.util.*;
+
+public class Main
+{
+	static int plus = 0;
+	static int minus = 0;
+	static int zero = 0;
+	
+	public static void cp1(int[][] arr, int len, int x, int y)
+	{
+		int h = len / 3;
+		int mcount = 0;
+		int pcount = 0;
+		int zcount = 0;
+		
+		for (int i = x; i < x + h; i++)
+		{
+			for (int j = y; j < y + h; j++)
+			{
+				if (arr[i][j] == -1)
+				{
+					mcount++;
+					if (mcount == h * h)
+					{
+						for (int w = x; w < x + h; w++)
+						{
+							for (int k = y; k < y + h; k++)
+							{
+								arr[w][k] = 7;
+							}
+						}
+						minus++;
+					}
+				} else if (arr[i][j] == 0)
+				{
+					zcount++;
+					if (zcount == h * h)
+					{
+						for (int w = x; w < x + h; w++)
+						{
+							for (int k = y; k < y + h; k++)
+							{
+								arr[w][k] = 8;
+							}
+						}
+						zero++;
+					}
+				} else if (arr[i][j] == 1)
+				{
+					pcount++;
+					if (pcount == h * h)
+					{
+						for (int w = x; w < x + h; w++)
+						{
+							for (int k = y; k < y + h; k++)
+							{
+								arr[w][k] = 6;
+							}
+						}
+						plus++;
+					}
+				}
+			}
+		}
+		
+		len = len / 3;
+		
+		if (len >= 3)
+		{
+			cp1(arr, len, x, y); // 좌상단
+			cp1(arr, len, x, y + h / 3); // 좌중간
+			cp1(arr, len, x, y + h * 2 / 3); // 좌하단
+			
+			cp1(arr, len, x + h / 3, y);// 중상단
+			cp1(arr, len, x + h / 3, y + h / 3); // 중간중
+			cp1(arr, len, x + h / 3, y + h * 2 / 3); // 중하단
+			
+			cp1(arr, len, x + h * 2 / 3, y);// 우상단
+			cp1(arr, len, x + h * 2 / 3, y + h / 3); // 우중간
+			cp1(arr, len, x + h * 2 / 3, y + h * 2 / 3); // 우하단
+		}
+	}
+	
+	public static void main(String[] args) throws IOException
+	{
+		// StringTokenizer 이용
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int len = Integer.parseInt(br.readLine());
+		
+		int arr[][] = new int[len][len];
+		
+		int startp = 0;
+		int startz = 0;
+		int startm = 0;
+		
+		// 배열에 값 넣기.
+		for (int i = 0; i < len; i++)
+		{
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			for (int j = 0; j < len; j++)
+			{
+				arr[i][j] = Integer.parseInt(st.nextToken());
+				if (arr[i][j] == 1)
+					startp++;
+				else if (arr[i][j] == -1)
+					startm++;
+				else if (arr[i][j] == 0)
+					startz++;
+			}
+		}
+		
+		if (startp == len * len || startm == len * len || startz == len * len)
+		{
+			System.out.println(startm / (len * len));
+			System.out.println(startz / (len * len));
+			System.out.println(startp / (len * len));
+		} else
+		{
+			
+			int div1 = len / 3;
+			int div2 = len * 2 / 3;
+			
+			// System.out.println(div1 + " " + div2);
+			
+			cp1(arr, len, 0, 0); // 좌상단
+			cp1(arr, len, 0, div1); // 좌중간
+			cp1(arr, len, 0, div2); // 좌하단
+			
+			cp1(arr, len, div1, 0);// 중상단
+			cp1(arr, len, div1, div1); // 중중간
+			cp1(arr, len, div1, div2); // 중하단
+			
+			cp1(arr, len, div2, 0);// 우상단
+			cp1(arr, len, div2, div1); // 우중단
+			cp1(arr, len, div2, div2); // 우하단
+			
+			// for (int i = 0; i < len; i++)
+			// {
+			// for (int j = 0; j < len; j++)
+			// {
+			// System.out.print(arr[i][j] + " ");
+			// }
+			// System.out.println();
+			// }
+			
+			System.out.println(minus);
+			System.out.println(zero);
+			System.out.println(plus);
+		}
+	}
+}
