@@ -1,0 +1,49 @@
+package block;
+
+import java.util.*;
+
+public class Main
+{
+	static int postree[];
+	static int intree[];
+	
+	static void order(int is, int ie, int ps, int pe)
+	{
+		if (is > ie || ps > pe)
+			return;
+		
+		int root = postree[pe];
+		System.out.print(root + " ");
+		
+		order(is, intree[root] - 1, ps, ps + intree[root] - is - 1);
+		order(intree[root] + 1, ie, ps + intree[root] - is, pe - 1);
+	}
+	
+	public static void main(String[] args)
+	{
+		Scanner in = new Scanner(System.in);
+		
+		int n = Integer.parseInt(in.next());
+		
+		postree = new int[n];
+		intree = new int[n + 1];
+		
+		for (int i = 0; i < n; i++)
+		{
+			int d = in.nextInt();
+			intree[d] = i;
+		}
+		
+		for (int j = 0; j < n; j++)
+		{
+			postree[j] = in.nextInt();
+		}
+		
+		order(0, n - 1, 0, n - 1);
+		// for (int i = 0; i < n; i++)
+		// {
+		// System.out.print(intree[i] + " ");
+		// }
+		
+	}
+}
