@@ -1,0 +1,71 @@
+import java.io.*;
+import java.util.*;
+ 
+public class Main
+{
+    
+    public static void cp1(String[][] arr, int len, int x, int y, int cflag)
+    {
+        int h = len / 3;
+        //System.out.println("len : " + len + " ,h : " + h);
+        
+        if (cflag == 1)
+        {
+            for (int i = x; i < x + h; i++)
+            {
+                for (int j = y; j < y + h; j++)
+                {
+                    arr[i][j] = " ";
+                }
+            }
+        }
+        
+        len = len / 3; // h와 같은 값
+        
+        if (len >= 3)
+        {
+            cp1(arr, len, x, y, 0); // 좌상단
+            cp1(arr, len, x, y + h / 3, 0); // 좌중간
+            cp1(arr, len, x, y + h * 2 / 3, 0); // 좌하단
+            
+            cp1(arr, len, x + h / 3, y, 0);// 중상단
+            cp1(arr, len, x + h / 3, y + h / 3, 1); // 중간중
+            cp1(arr, len, x + h / 3, y + h * 2 / 3, 0); // 중하단
+            
+            cp1(arr, len, x + h * 2 / 3, y, 0);// 우상단
+            cp1(arr, len, x + h * 2 / 3, y + h / 3, 0); // 우중간
+            cp1(arr, len, x + h * 2 / 3, y + h * 2 / 3, 0); // 우하단
+        }
+    }
+    
+    public static void main(String[] args) throws IOException
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        
+        int len = Integer.parseInt(br.readLine());
+        
+        String arr[][] = new String[len][len];
+        
+        // 배열에 값 넣기.
+        for (int i = 0; i < len; i++)
+        {
+            for (int j = 0; j < len; j++)
+            {
+                arr[i][j] = "*";
+            }
+        }
+        
+        cp1(arr, len*3, 0, 0, 0);
+        
+        for (int i = 0; i < len; i++)
+        {
+            for (int j = 0; j < len; j++)
+            {
+                sb.append(arr[i][j]);
+            }
+            sb.append("\n");
+        }
+        System.out.println(sb);
+    }
+}
