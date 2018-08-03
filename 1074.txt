@@ -1,0 +1,53 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+ 
+public class Main
+{
+    static int count = 1;
+    static int result = 0;
+    
+    public static int cp1(int len, int x, int y, int r, int c, int s)
+    {
+        int h = len / 2;
+        
+        if (s == 1)
+            count--;
+        
+        //System.out.println("x : " + x + " ,y : " + y + ", count : " + count + " r,c : " + r + "," + c);
+        if (x == r && y == c)
+        {
+            result = count;
+            return 0;
+        } else
+        {
+            count++;
+        }
+        len = len / 2;
+        if (len >= 2)
+        {
+            cp1(len, x, y, r, c, 1); // 좌상단
+            cp1(len, x, y + h / 2, r, c, 0); // 우상단
+            cp1(len, x + h / 2, y, r, c, 0); // 좌하단
+            cp1(len, x + h / 2, y + h / 2, r, c, 0); // 우하단
+        }
+        return 0;
+    }
+    
+    public static void main(String[] args) throws IOException
+    {
+        // StringTokenizer 이용
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int n = Integer.parseInt(st.nextToken());
+        int r = Integer.parseInt(st.nextToken());
+        int c = Integer.parseInt(st.nextToken());
+        
+        int len = (int) Math.pow(2, n);
+        
+        cp1(len * 2, 0, 0, r, c, 1);
+        
+        System.out.print(result);
+    }
+}
