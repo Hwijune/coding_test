@@ -1,0 +1,41 @@
+package block;
+ 
+import java.util.*;
+ 
+class Main
+{
+    public static void main(String args[])
+    {
+        Scanner sc = new Scanner(System.in);
+        long a = sc.nextLong();
+        long b = sc.nextLong();
+        
+        Boolean[] check = new Boolean[1000002];
+        
+        for (int i = 0; i < 1000002; ++i)
+            check[i] = false;
+        
+        long end = (long) Math.sqrt(b);
+        
+        for (long i = 2; i <= end; ++i)
+        {
+            long k = i * i;
+            long start = ((a - 1) / k) * k + k;
+            for (long j = start; j <= b; j += k)
+            {
+                check[(int) (j - a)] = true;
+            }
+        }
+        int sz = (int) (b - a + 1);
+        int ans = 0;
+        for (int i = 0; i < sz; ++i)
+        {
+            if (check[i] == true)
+            {
+                System.out.println(i + 1);
+                ans += 1;
+            }
+        }
+        System.out.print(sz - ans);
+    }
+}
