@@ -1,0 +1,26 @@
+package block;
+ 
+import java.io.*;
+import java.util.*;
+ 
+class Main
+{
+    public static void main(String args[]) throws NumberFormatException, IOException
+    {
+        Scanner in = new Scanner(System.in);
+        
+        int T = in.nextInt();
+        
+        while (T-- > 0)
+        {
+            int a = in.nextInt();
+            if (6 % a == 0)
+            {
+                System.out.println("0");
+            } else if (a == 4)
+                System.out.println("2");
+            else
+                System.out.println("1");
+        }
+    }
+}
