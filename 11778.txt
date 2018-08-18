@@ -1,0 +1,75 @@
+package block;
+ 
+import java.io.*;
+import java.math.BigInteger;
+import java.util.*;
+ 
+public class Main
+{
+    static final long mod = 1000000007;
+    
+    // 행렬곱
+    static public long[][] productMatrix(long[][] A, long[][] B)
+    {
+        long[][] answer = new long[A.length][B[0].length];
+        for (int i = 0; i < answer.length; i++)
+        {
+            for (int j = 0; j < answer[0].length; j++)
+            {
+                for (int k = 0; k < A[0].length; k++)
+                {
+                    answer[i][j] += A[i][k] * B[k][j];
+                }
+                answer[i][j] %= mod;
+            }
+        }
+        return answer;
+    }
+    
+    static long solve(long m)
+    {
+        if (m <= 1)
+            return m;
+        else
+        {
+            long ans[][] = { { 1, 0 }, { 0, 1 } }; // 단위행렬
+            long a[][] = { { 1, 1 }, { 1, 0 } };
+            
+            while (m > 0)
+            {
+                if (m % 2 == 1)
+                {
+                    ans = productMatrix(ans, a);
+                }
+                a = productMatrix(a, a);
+                m /= 2;
+            }
+            
+            return ans[0][1];
+        }
+    }
+    
+    static long euclid(long a, long b)
+    {
+        if (b == 0)
+        {
+            return a;
+        } else
+            return euclid(b, a % b);
+    }
+    
+    public static void main(String[] args) throws Exception
+    {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(in.readLine());
+        
+        long n = Long.parseLong(st.nextToken());
+        long m = Long.parseLong(st.nextToken());
+        
+        long gcd = euclid(n, m);
+        
+        long res = solve(gcd);
+        
+        System.out.println(res);
+    }
+}
