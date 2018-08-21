@@ -1,0 +1,39 @@
+package block;
+ 
+import java.io.*;
+import java.util.*;
+ 
+public class Main
+{
+    static long euler(long n)
+    {
+        double result = n;
+        
+        for (long p = 2; p * p <= n; p++)
+        {
+            // p가 소인수인지 확인
+            if (n % p == 0)
+            {
+                while (n % p == 0) // 아닐때 까지 나눠줌
+                {
+                    n /= p;
+                }
+                result *= (1.0 - (1.0 / (double) p)); // 오일러공식
+            }
+        }
+        
+  //위에 다하면 한개가 남음(위에서 p*p로 걸렀기 때문에, 5이면 남음)
+        if (n > 1)
+            result *= (1.0 - (1.0 / (double) n));
+        
+        return (long) result;
+    }
+    
+    public static void main(String[] args) throws Exception
+    {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        long n = Long.parseLong(in.readLine());
+        
+        System.out.println(euler(n));
+    }
+}
