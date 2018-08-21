@@ -1,0 +1,54 @@
+package block;
+ 
+import java.io.*;
+import java.util.*;
+ 
+public class Main
+{
+    public static void main(String[] args) throws Exception
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuffer sb = new StringBuffer();
+
+        
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        int sum = 0;
+        
+        // 아홉명의 키와 합 받기
+        for (int i = 0; i < 9; i++)
+        {
+            arr.add(i, Integer.parseInt(br.readLine()));
+            sum += arr.get(i);
+        }
+        
+        Collections.sort(arr);
+        
+        int a = 0;
+        int b = 0;
+        
+        for (int i = 0; i < arr.size() - 1; i++)
+        {
+            for (int j = i + 1; j < arr.size(); j++)
+            {
+                if (sum - (arr.get(i) + arr.get(j)) == 100)
+                {
+                    a = i;
+                    b = j;
+                    break;
+                }
+            }
+        }
+        
+        for (int i = 0; i < arr.size(); i++)
+        {
+            if (arr.get(i) == arr.get(a) || arr.get(i) == arr.get(b))
+            {
+                continue;
+            } else
+                sb.append(arr.get(i) + "\n");
+        }
+        
+        System.out.println(sb);
+        
+    }
+}
