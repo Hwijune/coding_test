@@ -1,0 +1,63 @@
+package block;
+
+import java.util.*;
+import java.io.*;
+
+public class Main
+{
+	static int n;
+	static List<List<Integer>> tree = new ArrayList<List<Integer>>();
+	static int[] parent;
+	static int[] visit;
+	
+	static public void dfs(int v)
+	{
+		visit[v] = 1;
+		for (int k : tree.get(v))
+		{
+			if (visit[k] == 0)
+			{
+				System.out.println("v : " + v + " k : " + k);
+				parent[k] = v;
+				dfs(k);
+			}
+		}
+	}
+	
+	public static void main(String[] args) throws NumberFormatException, IOException
+	{
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		
+		n = Integer.parseInt(br.readLine());
+		parent = new int[n + 1];
+		visit = new int[n + 1];
+		
+		for (int i = 0; i <= n; i++)
+			tree.add(new ArrayList<Integer>());
+		
+		
+		
+		for (int i = 1; i < n; i++)
+		{
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int u = Integer.parseInt(st.nextToken());
+			int v = Integer.parseInt(st.nextToken());
+			tree.get(u).add(v);
+			tree.get(v).add(u);
+		}
+		
+		for(int i=0; i<n; i++)
+		{
+			System.out.println(tree.get(i));
+		}
+		
+		dfs(1);
+		
+		for (int i = 0; i <= n; i++)
+		{
+			System.out.print(visit[i] + " ");
+		}
+	}
+	
+}
