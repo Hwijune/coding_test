@@ -1,0 +1,63 @@
+package block;
+
+import java.io.*;
+import java.util.*;
+
+public class Main
+{
+	public static void main(String[] args) throws IOException
+	{
+		// StringTokenizer ÀÌ¿כ
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuffer sb = new StringBuffer();
+		
+		int cont1[][] = { { 5000000, 3000000, 2000000, 500000, 300000, 100000 }, { 1, 2, 3, 4, 5, 6 } };
+		int cont2[][] = { { 5120000, 2560000, 1280000, 640000, 320000 }, { 1, 2, 4, 8, 16 } };
+		
+		int n = Integer.parseInt(br.readLine());
+		
+		while (n-- > 0)
+		{
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			
+			int sum = 0;
+			int sumc1 = 0;
+			int sumc2 = 0;
+			
+			// System.out.println(cont1[0][1]);
+			
+			if (a >= 1 && a <= 100)
+			{
+				for (int i = 0; i < cont1[0].length; i++)
+				{
+					sumc1 += cont1[1][i];
+					// System.out.println("a : "+ a + " ,sumc1 : " + sumc1);
+					if (sumc1 >= a)
+					{
+						sum += cont1[0][i];
+						break;
+					}
+				}
+			}
+			// sb.append(sum + " ");
+			if (b >= 1 && b <= 100)
+			{
+				for (int i = 0; i < cont2[0].length; i++)
+				{
+					sumc2 += cont2[1][i];
+					if (sumc2 >= b)
+					{
+						sum += cont2[0][i];
+						break;
+					}
+				}
+				// sb.append(sum + " ");
+			}
+			sb.append(sum + "\n");
+			
+		}
+		System.out.println(sb);
+	}
+}

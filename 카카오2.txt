@@ -1,0 +1,86 @@
+import java.io.*;
+import java.text.DecimalFormat;
+import java.util.*;
+
+public class Main
+{
+	
+	public static double mean(double[] array, int s, int e) // 산술 평균 구하기
+	{
+		double sum = 0.0;
+		int k = e - s;
+		for (int i = s; i < e; i++)
+			sum += array[i];
+		
+		return sum / k;
+	}
+	
+	public static double standardDeviation(double[] array, int s, int e) // 표준편차
+	{
+		if (array.length < 2)
+			return 0;
+		
+		double k = e - s;
+		double sum = 0.0;
+		double sd = 0.0;
+		double diff;
+		double meanValue = mean(array, s, e);
+		//System.out.println("ave: " + meanValue);
+		for (int i = s; i < e; i++)
+		{
+			diff = array[i] - meanValue;
+			sum += diff * diff;
+		}
+		sd = Math.sqrt(sum / k);
+		
+		return sd;
+	}
+	
+	public static void main(String[] args) throws IOException
+	{
+		// StringTokenizer 이용
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuffer sb = new StringBuffer();
+		
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int n = Integer.parseInt(st.nextToken());
+		int k = Integer.parseInt(st.nextToken());
+		
+		double arr[] = new double[n];
+		
+		StringTokenizer st1 = new StringTokenizer(br.readLine());
+		for (int i = 0; i < arr.length; i++)
+		{
+			arr[i] = Integer.parseInt(st1.nextToken());
+		}
+		
+		int q = k;
+		double res = 100000000;
+		
+		for (int f = 0; f < k; f++)
+		{
+			double d1 = 0;
+			// System.out.println(f);
+			for (int i = 0; i < arr.length - q + 1; i++)
+			{
+				//System.out.println("s : " + i + ", e : " + (i + q));
+				
+				d1 = standardDeviation(arr, i, (i + q));
+				// System.out.println(d1);
+				if (d1 < res)
+				{
+					res = d1;
+				}
+			}
+			q++;
+		}
+		
+		String t = String.format("%.12f", res);
+		
+		for (int w = 0; w < 13; w++)
+		{
+			sb.append(t.charAt(w));
+		}
+		System.out.println(sb);
+	}
+}
