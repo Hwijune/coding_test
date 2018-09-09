@@ -1,0 +1,90 @@
+package block;
+ 
+import java.io.*;
+ 
+import java.util.*;
+ 
+public class Main
+{
+    static int dx[] = { 0, 0, 1, -1 };
+    static int dy[] = { 1, -1, 0, 0 };
+    static int box[][] = new int[1001][1001];
+    static int check[][] = new int[1001][1001];
+    static Queue<Pos> q = new LinkedList<>();
+    
+    static public class Pos // 좌표
+    {
+        public int i;
+        public int j;
+        
+        Pos(int i, int j)
+        {
+            this.i = i;
+            this.j = j;
+        }
+    }
+    
+    public static void main(String[] args) throws IOException
+    {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int M = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        
+        for (int i = 1; i <= N; i++)
+        {
+            st = new StringTokenizer(br.readLine());
+            for (int j = 1; j <= M; j++)
+            {
+                box[i][j] = Integer.parseInt(st.nextToken());
+                if (box[i][j] == 1) // 익은 것 큐에넣기
+                {
+                    q.offer(new Pos(i, j));
+                    check[i][j] = 1;
+                }
+            }
+        }
+        
+        while (!q.isEmpty())
+        {
+            int x = q.peek().i; // i값
+            int y = q.peek().j; // j값
+            q.poll();
+            
+            // 익은 토마토의 상하좌우는 다음에 익기 때문에 큐에 담아야한다.
+            // 0,1(하단) 0,-1(상단) 1,0(우) -1,0(좌)
+            for (int i = 0; i < 4; i++)
+            {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                
+                // 상자 범위 안
+                if (1 <= nx && nx <= N && 1 <= ny && ny <= M)
+                {
+                    if (check[nx][ny] == 0 && box[nx][ny] == 0) //체크 안한 칸
+                    {
+                        check[nx][ny] = check[x][y] + 1;
+                        box[nx][ny] = 1;
+                        q.offer(new Pos(nx, ny));
+                    }
+                }
+            }
+        }
+        int flag = 0;
+        int max = 0;
+        for (int i = 1; i <= N; i++)
+        {
+            for (int j = 1; j <= M; j++)
+            {
+                if (box[i][j] == 0) // 다 돌았는데도 0이있음
+                    flag = 1;
+                if (check[i][j] > max)
+                    max = check[i][j];
+            }
+        }
+        if (flag == 1)
+            System.out.println(-1);
+        else
+            System.out.println(max - 1);
+    }
+}
