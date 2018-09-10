@@ -1,0 +1,57 @@
+#include <iostream>
+#include <queue>
+#include <cstdio>
+using namespace std;
+int M, N;
+int arr[101][101];
+int dx[] = { -1,1,0,0 };
+int dy[] = { 0,0,1,-1 };
+queue<pair<int, int>> q;
+ 
+void bfs()
+{
+    while (!q.empty())
+    {
+        int x = q.front().first; //i값
+        int y = q.front().second; //j값
+        q.pop();
+ 
+        // 0,1(하단) 0,-1(상단) 1,0(우) -1,0(좌)
+        for (int i = 0; i < 4; i++)
+        {
+            int nx = x + dx[i];
+            int ny = y + dy[i];
+            if (0 <= nx && nx < M && 0 <= ny && ny < N)
+            {
+                if (arr[nx][ny] == 1)
+                {
+                    arr[nx][ny] = arr[x][y] + 1;
+                    q.push(make_pair(nx, ny));
+                }
+            }
+        }
+    }
+}
+ 
+int main(void) {
+ 
+    cin >> M >> N;
+ 
+    for (int i = 0; i < M; i++)
+    {
+        for (int j = 0; j < N; j++)
+        {
+            scanf("%1d", &arr[i][j]);
+        }
+    }
+ 
+    arr[0][0] = 2;
+    q.push(make_pair(0, 0));
+    bfs();
+ 
+    int res = arr[M-1][N-1] - 1;
+    printf("%d", res);
+ 
+ 
+    return 0;
+}
