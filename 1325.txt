@@ -1,0 +1,65 @@
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <cstring>
+#include <vector>
+ 
+using namespace std;
+int n, m;
+int nodeNum[10001];
+int check[10001];
+vector < vector<int>> tree;
+ 
+int max(int a, int b)
+{
+    return ((a > b) ? a : b);
+}
+ 
+int dfs(int node)
+{
+    check[node] = true;
+ 
+    int ret = 0;
+    for (int i = 0; i < (int)tree[node].size(); i++)
+    {
+        if (!check[tree[node][i]])
+        {
+            ret += dfs(tree[node][i]) + 1;
+        }
+    }
+ 
+    return ret;
+}
+int main() {
+    
+    scanf("%d %d", &n, &m);
+ 
+    tree.resize(n + 1);
+ 
+    int a, b;
+ 
+    for (int i = 0; i < m; i++)
+    {
+        scanf("%d %d", &a, &b);
+        tree[b].push_back(a);
+    }
+ 
+    int maxvalue = 0;
+    
+    for(int i = 1; i <= n; i++)
+    {
+        nodeNum[i] = dfs(i);
+        maxvalue = max(maxvalue, nodeNum[i]);
+        
+        memset(check, 0, sizeof(check));
+    }
+ 
+    for (int i = 1; i <= n; i++)
+    {
+        if (nodeNum[i] == maxvalue)
+        {
+            printf("%d ", i);
+        }
+    }
+    return 0;
+}
