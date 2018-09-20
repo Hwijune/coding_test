@@ -1,0 +1,66 @@
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+using namespace std;
+ 
+int t, n, x, y, r, parent[3001];
+int ans;
+pair<pair<int, int>, int> a[3001];
+ 
+ 
+void init()
+{
+    for (int i = 1; i <= n; i++)
+        parent[i] = i;
+}
+ 
+int find(int v)
+{
+    if (parent[v] == v)
+        return v;
+    else {
+        int p = find(parent[v]);
+        parent[v] = p;
+        return p;
+    }
+}
+ 
+void Union(int x, int y) {
+ 
+    x = find(x);
+    y = find(y);
+ 
+    if (x == y)
+        return;
+    ans--; //합칠때마다 결과값 줄이기
+    parent[x] = y; //루트 바꿔줌
+}
+ 
+double dist(pair<int, int> x, pair<int, int> y)  //지점간 거리
+{
+    return sqrt((x.first - y.first)*(x.first - y.first) + (x.second - y.second)*(x.second - y.second));
+}
+ 
+int main() {
+    scanf("%d", &t);
+    while (t--) {
+        scanf("%d", &n);
+        for (int i = 1; i <= n; i++) {
+            scanf("%d%d%d", &x, &y, &r);
+            a[i] = { { x,y },r };
+        }
+        init();
+        ans = n;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= n; j++) {
+                if (i == j)
+                    continue;
+                double d = dist(a[i].first, a[j].first);
+                if (d <= (double)(a[i].second + a[j].second)) //r보다 작으면
+                    Union(i,j);
+            }
+        }
+        printf("%d\n", ans);
+    }
+    return 0;
+}
