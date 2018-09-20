@@ -1,0 +1,36 @@
+#include <iostream>
+#include <queue>
+#include <cstdio>
+using namespace std;
+ 
+int node[102][102];
+int visited[102];
+int cnt;
+int n, k;
+ 
+void dfs(int u)
+{
+    cnt++;
+    visited[u] = 1;
+    for (int i = 1; i <= n; i++)
+    {
+        if (!visited[i] && node[u][i])
+        {
+            dfs(i);
+        }
+    }
+}
+int main(void) {
+    
+    scanf("%d%d", &n, &k);
+    for (int i = 0; i < k; i++)
+    {
+        int a, b;
+        scanf("%d%d", &a, &b);
+        node[a][b] = node[b][a] = 1;
+    }
+ 
+    dfs(1);
+    printf("%d", cnt - 1);
+    return 0;
+}
