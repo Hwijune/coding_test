@@ -1,0 +1,44 @@
+#include <cstdio>
+#include <algorithm>
+#include <cmath>
+#include <vector>
+using namespace std;
+int t,n;
+ 
+vector<int> list;
+ 
+void dfs(int idx)
+{
+    int next = list[idx];
+    if (next != 0)
+    {
+        list[idx] = 0;
+        dfs(next);
+    }
+}
+ 
+int main() {
+    scanf("%d", &t);
+ 
+    while (t--) {
+        scanf("%d", &n);
+        list = vector<int>(n + 1);
+ 
+        for (int i = 1; i <= n; i++) {
+            scanf("%d", &list[i]);
+        }
+ 
+        int ans = 0;
+ 
+        for (int i = 1; i <= n; i++)
+        {
+            if (list[i] != 0)
+            {
+                dfs(i);
+                ans++;
+            }
+        }
+        printf("%d\n", ans);
+    }
+    return 0;
+}
