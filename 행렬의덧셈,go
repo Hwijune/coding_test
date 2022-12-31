@@ -1,0 +1,22 @@
+#https://programmers.co.kr/learn/courses/30/lessons/12950
+
+func solution(arr1 [][]int, arr2 [][]int) [][]int {
+    
+    var row int
+    var col int
+    row = len(arr1)
+    col = len(arr1[0])
+    
+    res := make([][]int, row) 
+    for i := 0; i < row; i++ {
+        res[i] = make([]int, col)
+    }
+    
+    for i:= 0 ; i < row ; i++{
+        for j:= 0 ; j < col ; j++ {
+            res[i][j] = arr1[i][j] + arr2[i][j]
+            //println(arr1[i][j], arr2[i][j])
+        }
+    }
+    return res
+}
